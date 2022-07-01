@@ -1,11 +1,18 @@
 version: '3'
 services:
-  app:
-    image: node:12.18.0-slim
+  create:
+    image: node:lts-stretch
     working_dir: "/app"
-    command: sh -c "cd react-sample && yarn && yarn start"
     ports:
       - "3000:3000"
     volumes:
-     - ./app:/app/
+      - ./app:/app/
+  app:
+    image: node:lts-stretch
+    working_dir: "/app"
+    ports:
+      - "3000:3000"
+    command: sh -c "cd ${PROJ} && yarn start"
+    volumes:
+      - ./app:/app/
     tty: true
